@@ -1,0 +1,114 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance;
+
+    public List<GameObject> animalPrefabs;
+
+    public Animal activeAnimal;
+
+    public Board board;
+    public GameObject tilePrefab;
+    public Sprite boardSprite;
+
+    public int boardWidth = 7;
+    public int boardHeight = 9;
+
+    public bool isMoving = false;
+
+    List<List<Tile>> tiles = new List<List<Tile>>();
+
+    float tileSize;
+    float leftEdge;
+    float topEdge;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+
+    // Use this for initialization
+    void Start()
+    {
+        tileSize = board.boardSprite.bounds.size.x / boardWidth;
+        leftEdge = (float)(board.transform.position.x - tileSize * 3);
+        topEdge = (float)(board.transform.position.y + tileSize * 4);
+
+        createTiles();
+        createPlayers();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (activeAnimal != null && isMoving)
+        {
+            activeAnimal.TurnUpdate();
+        }
+    }
+    void createTiles()
+    {
+        for (int rowIndx = 0; rowIndx < boardWidth; rowIndx++)
+        {
+            List<Tile> row = new List<Tile>();
+            for (int colIndx = 0; colIndx < boardHeight; colIndx++)
+            {
+                Vector3 pos = new Vector2(leftEdge + rowIndx * tileSize, topEdge - colIndx * tileSize);
+
+                Tile tile = ((GameObject)Instantiate(tilePrefab, pos, Quaternion.identity)).GetComponent<Tile>();
+
+                Rescale(tile.gameObject);
+
+                row.Add(tile);
+            }
+            tiles.Add(row);
+        }
+
+
+    }
+
+    private void Rescale(GameObject rescalable)
+    {
+        float spriteScale = (float)board.boardSprite.texture.width / (float)(rescalable.GetComponent<SpriteRenderer>().sprite.texture.width * boardWidth);
+
+        spriteScale *= rescalable.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit / board.boardSprite.pixelsPerUnit;
+
+        rescalable.transform.localScale = new Vector3(spriteScale, spriteScale, 1);
+    }
+
+    private void createPlayers()
+    {
+        Vector3 pos = tiles[6][6].transform.position;
+
+        Animal animal = ((GameObject)Instantiate(animalPrefabs[0], pos, Quaternion.identity)).GetComponent<Animal>();
+        animal.tile = tiles[6][6];
+        Rescale(animal.gameObject);
+
+        tiles[6][6].animal = animal;
+    }
+
+    public void moveSelectedAnimal(Tile destTile)
+    {
+        if (activeAnimal != null) //TODO use assert for selectedAnimal
+        {
+            if (destTile != activeAnimal.tile)
+            {
+                isMoving = true;
+                activeAnimal.moveDestination = destTile.transform.position;
+                destTile.animal = activeAnimal;
+                activeAnimal.tile = destTile;
+            }
+        }
+    }
+
+    public void nextTurn()
+    {
+        isMoving = false;
+        activeAnimal = null;
+    }
+}
