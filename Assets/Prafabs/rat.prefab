@@ -40,8 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e65ad939d7b15e46b35fb3404f6f333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDestination: {x: 0, y: 0, z: 0}
-  moveSpeed: 10
+  moveSpeed: 1
+  startTime: 0
+  journeyLength: 0
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  tile: {fileID: 0}
 --- !u!212 &21264958
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -78,6 +82,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -1669348737
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: .140000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
