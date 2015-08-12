@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         if (activeAnimal != null && isMoving)
         {
-            activeAnimal.TurnUpdate();
+            activeAnimal.Move();
         }
     }
     void createTiles()
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         Rescale(animal.gameObject);
 
         tiles[6][6].animal = animal;
-    }
+    }    
 
     public void moveSelectedAnimal(Tile destTile)
     {
@@ -99,15 +99,14 @@ public class GameManager : MonoBehaviour
             if (destTile != activeAnimal.tile)
             {
                 isMoving = true;
-                activeAnimal.moveDestination = destTile.transform.position;
-                destTile.animal = activeAnimal;
-                activeAnimal.tile = destTile;
+
+                activeAnimal.SetupMovement(destTile);               
             }
         }
     }
 
     public void nextTurn()
-    {
+    {        
         isMoving = false;
         activeAnimal = null;
     }

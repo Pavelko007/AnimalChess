@@ -3,27 +3,34 @@ using System.Collections;
 
 public class Animal : MonoBehaviour
 {
-    public Vector3 moveDestination;
-    public float moveSpeed = 10.0f;
+    public float moveSpeed = 1.0f;
+    public float startTime;
+    public float journeyLength;
+
+    public Vector3 startPos;
+    public Vector3 endPos;
 
     public Tile tile;
 
-    void Awake()
+    public void Move()
     {
-        moveDestination = transform.position;
+        float distCovered = (Time.time - startTime) * moveSpeed;
+        float fracJourney = distCovered / journeyLength;
+        transform.position = Vector3.Lerp(startPos, endPos, fracJourney);
+
+        if (endPos == transform.position)
+        {            
+            GameManager.instance.nextTurn();
+        }
     }
 
-    public void TurnUpdate()
+    public void SetupMovement(Tile destTile)
     {
-        if (Vector3.Distance(moveDestination, transform.position) > 0.1f)
-        {
-            transform.position += (moveDestination - transform.position).normalized * moveSpeed * Time.deltaTime; //TODO may cause overrun
-
-            if (Vector3.Distance(moveDestination, transform.position) <= 0.1f)
-            {
-                transform.position = moveDestination;
-                GameManager.instance.nextTurn();
-            }
-        }
+        startPos = transform.position;
+        endPos = destTile.transform.position;
+        journeyLength = Vector3.Distance(startPos, endPos);
+        startTime = Time.time;
+        destTile.animal = this;
+        tile = destTile;
     }
 }
