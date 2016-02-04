@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile : MonoBehaviour
 {
-    public Animal animal;
+    public AnimalPiece animalPiece;
 
     // Use this for initialization
     void Start()
@@ -21,13 +21,13 @@ public class Tile : MonoBehaviour
     {
         if (!GameManager.instance.isMoving)
         {
-            if (GameManager.instance.activeAnimal != null)
+            if (GameManager.instance.ActiveAnimalPiece != null)
             {
                 GameManager.instance.moveSelectedAnimal(this);
             }
-            else if(animal != null)
+            else if(animalPiece != null)
             {
-                GameManager.instance.activeAnimal = animal;
+                GameManager.instance.ActiveAnimalPiece = animalPiece;
             }
         }
     }

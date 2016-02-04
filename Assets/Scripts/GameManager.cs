@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> animalPrefabs;
 
-    public Animal activeAnimal;
+    public AnimalPiece ActiveAnimalPiece;
 
     public Board board;
     public GameObject tilePrefab;
@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activeAnimal != null && isMoving)
+        if (ActiveAnimalPiece != null && isMoving)
         {
-            activeAnimal.Move();
+            ActiveAnimalPiece.Move();
         }
     }
     void createTiles()
@@ -85,22 +85,22 @@ public class GameManager : MonoBehaviour
     {
         Vector3 pos = tiles[6][6].transform.position;
 
-        Animal animal = ((GameObject)Instantiate(animalPrefabs[0], pos, Quaternion.identity)).GetComponent<Animal>();
-        animal.tile = tiles[6][6];
-        Rescale(animal.gameObject);
+        AnimalPiece animalPiece = ((GameObject)Instantiate(animalPrefabs[0], pos, Quaternion.identity)).GetComponent<AnimalPiece>();
+        animalPiece.tile = tiles[6][6];
+        Rescale(animalPiece.gameObject);
 
-        tiles[6][6].animal = animal;
+        tiles[6][6].animalPiece = animalPiece;
     }    
 
     public void moveSelectedAnimal(Tile destTile)
     {
-        if (activeAnimal != null) //TODO use assert for selectedAnimal
+        if (ActiveAnimalPiece != null) //TODO use assert for selectedAnimal
         {
-            if (destTile != activeAnimal.tile)
+            if (destTile != ActiveAnimalPiece.tile)
             {
                 isMoving = true;
 
-                activeAnimal.SetupMovement(destTile);               
+                ActiveAnimalPiece.SetupMovement(destTile);               
             }
         }
     }
@@ -108,6 +108,6 @@ public class GameManager : MonoBehaviour
     public void nextTurn()
     {        
         isMoving = false;
-        activeAnimal = null;
+        ActiveAnimalPiece = null;
     }
 }

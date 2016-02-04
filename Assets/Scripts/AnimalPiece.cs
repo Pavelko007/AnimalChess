@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Animal : MonoBehaviour
+public class AnimalPiece : MonoBehaviour
 {
     public float moveSpeed = 1.0f;
     public float startTime;
@@ -30,7 +30,7 @@ public class Animal : MonoBehaviour
         endPos = destTile.transform.position;
         journeyLength = Vector3.Distance(startPos, endPos);
         startTime = Time.time;
-        destTile.animal = this;
+        destTile.animalPiece = this;
         tile = destTile;
     }
 }
