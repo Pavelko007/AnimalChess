@@ -1,33 +1,23 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Tile : MonoBehaviour
+namespace AnimalChess
 {
-    public AnimalPiece animalPiece;
-
-    // Use this for initialization
-    void Start()
+    public class Tile : MonoBehaviour
     {
+        public AnimalPiece animalPiece;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnMouseDown()
-    {
-        if (!GameManager.instance.isMoving)
+        void OnMouseDown()
         {
-            if (GameManager.instance.ActiveAnimalPiece != null)
+            if (!GameManager.instance.isMoving)
             {
-                GameManager.instance.moveSelectedAnimal(this);
-            }
-            else if(animalPiece != null)
-            {
-                GameManager.instance.ActiveAnimalPiece = animalPiece;
+                if (GameManager.instance.ActiveAnimalPiece != null)
+                {
+                    GameManager.instance.moveSelectedAnimal(this);
+                }
+                else if(animalPiece != null)
+                {
+                    GameManager.instance.ActiveAnimalPiece = animalPiece;
+                }
             }
         }
     }

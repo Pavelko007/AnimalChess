@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Board : MonoBehaviour
+namespace AnimalChess
 {
-    public Sprite boardSprite;
-
-    // Use this for initialization
-    void Start()
+    public class Board : MonoBehaviour
     {
-        boardSprite = GetComponent<SpriteRenderer>().sprite;
-    }
+        public Sprite boardSprite;
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        // Use this for initialization
+        void Start()
+        {
+            boardSprite = GetComponent<SpriteRenderer>().sprite;
+        }
     }
 }
