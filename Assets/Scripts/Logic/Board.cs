@@ -15,7 +15,8 @@
             {
                 for (int colIdx = 0; colIdx < boardGrid.GetLength(1); colIdx++)
                 {
-                    boardGrid[rowIdx, colIdx] = new Cell(CellType.Walkable);
+                    var pos = new Postion(rowIdx, colIdx);
+                    boardGrid[rowIdx, colIdx] = new Cell(pos, CellType.Walkable);
                 }
             }
         }
