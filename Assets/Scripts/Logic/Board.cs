@@ -1,8 +1,11 @@
-﻿namespace AnimalChess.Logic
+﻿using System;
+
+namespace AnimalChess.Logic
 {
     public class Board
     {
         private Cell[,] boardGrid = new Cell[9,7];
+        
 
         public Board()
         {
@@ -15,15 +18,20 @@
             {
                 for (int colIdx = 0; colIdx < boardGrid.GetLength(1); colIdx++)
                 {
-                    var pos = new Postion(rowIdx, colIdx);
-                    boardGrid[rowIdx, colIdx] = new Cell(pos, CellType.Walkable);
+                    var pos = new Position(rowIdx, colIdx);
+                    boardGrid[rowIdx, colIdx] = new Cell(this, pos);
                 }
             }
         }
 
+        public Cell GetCell(Position position)
+        {
+            return GetCell(position.Row, position.Col);
+        }
+
         public Cell GetCell(int row, int col)
         {
-            return boardGrid[row - 1, col - 1];
+            return boardGrid[row, col];
         }
     }
 }
