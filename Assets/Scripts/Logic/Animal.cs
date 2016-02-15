@@ -11,7 +11,7 @@ namespace AnimalChess.Logic
         
         public bool Move(Direction direction)
         {
-            var nextPos = Cell.Position.NextPos(direction);
+            var nextPos = Cell.Position.GetNextTowards(direction);
             var nextCell = Cell.Board.GetCell(nextPos);
             return !nextCell.HasAnimal;
         }

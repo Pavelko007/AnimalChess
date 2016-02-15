@@ -13,7 +13,7 @@ namespace AnimalChessTests.LogicTests
             //Arrange
             var curCellMock = new Mock<ICell>();
             var nextCellMock = new Mock<ICell>();
-            curCellMock.Setup(x => x.Position.NextPos(It.IsAny<Direction>()));
+            curCellMock.Setup(x => x.Position.GetNextTowards(It.IsAny<Direction>()));
             curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(nextCellMock.Object);
             nextCellMock.Setup(foo => foo.HasAnimal).Returns(false);
 

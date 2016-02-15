@@ -6,9 +6,12 @@ namespace AnimalChess.Logic
     {
         int Row { get; }
         int Col { get; }
-        IPosition NextPos(Direction direction);
+        IPosition GetNextTowards(Direction direction);
     }
-
+    /// <summary>
+    /// identifies cell positions on board
+    /// leftmost bottom cell is at {row = 0, col = 0}
+    /// </summary>
     public class Position : IPosition
     {
         public int Row { get; private set; }
@@ -20,9 +23,33 @@ namespace AnimalChess.Logic
             Row = row;
         }
 
-        public IPosition NextPos(Direction direction)
+        public Position(Position position)
         {
-            return null;
+            Row = position.Row;
+            Col = position.Col;
+        }
+
+        public IPosition GetNextTowards(Direction direction)
+        {
+            var result = new Position(this);
+            switch (direction)
+            {
+                case Direction.Left:
+                    result.Row--;
+                    break;
+                case Direction.Right:
+                    result.Row++;
+                    break;
+                case Direction.Up:
+                    result.Col++;
+                    break;
+                case Direction.Down:
+                    result.Col--;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("direction", direction, null);
+            }
+            return result;
         }
 
         public override bool Equals(Object obj)
@@ -33,6 +60,14 @@ namespace AnimalChess.Logic
 
             var pos = (Position)obj;
             return pos.Row == Row && pos.Col == Col;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Row * 397) ^ Col;
+            }
         }
     }
 }
