@@ -1,5 +1,3 @@
-using System;
-
 namespace AnimalChess.Logic
 {
     public class Animal
