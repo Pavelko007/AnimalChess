@@ -2,9 +2,9 @@ namespace AnimalChess.Logic
 {
     public class Animal
     {
-        public Cell Cell { get; private set; }
+        public ICell Cell { get; private set; }
 
-        public Animal(Cell cell)
+        public Animal(ICell cell)
         {
             Cell = cell;
         }
@@ -12,7 +12,8 @@ namespace AnimalChess.Logic
         public bool Move(Direction direction)
         {
             var nextPos = Cell.Position.NextPos(direction);
-            return Cell.board.GetCell(nextPos).HasAnimal;
+            var nextCell = Cell.Board.GetCell(nextPos);
+            return !nextCell.HasAnimal;
         }
     }
 }

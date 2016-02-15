@@ -1,3 +1,5 @@
+using System;
+
 namespace AnimalChess.Logic
 {
     public class Position
@@ -13,7 +15,17 @@ namespace AnimalChess.Logic
 
         public Position NextPos(Direction direction)
         {
-            return new Position(1,1);
+            return new Position(0, 1);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            // Check for null values and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            var pos = (Position)obj;
+            return pos.Row == Row && pos.Col == Col;
         }
     }
 }

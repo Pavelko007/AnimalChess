@@ -2,7 +2,13 @@
 
 namespace AnimalChess.Logic
 {
-    public class Board
+    public interface IBoard
+    {
+        ICell GetCell(Position position);
+        ICell GetCell(int row, int col);
+    }
+
+    public class Board : IBoard
     {
         private Cell[,] boardGrid = new Cell[9,7];
         
@@ -24,12 +30,12 @@ namespace AnimalChess.Logic
             }
         }
 
-        public Cell GetCell(Position position)
+        public ICell GetCell(Position position)
         {
             return GetCell(position.Row, position.Col);
         }
 
-        public Cell GetCell(int row, int col)
+        public ICell GetCell(int row, int col)
         {
             return boardGrid[row, col];
         }

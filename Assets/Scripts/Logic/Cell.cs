@@ -1,15 +1,24 @@
 namespace AnimalChess.Logic
 {
-    public class Cell
+    public interface ICell
     {
-        public Position Position;
+        CellType Type { get; }
+        Animal Animal { get; set; }
+        bool HasAnimal { get; }
+        Position Position { get; set; }
+        IBoard Board { get; set; }
+    }
+
+    public class Cell : ICell
+    {
+        public Position Position { get; set; }
         private CellType cellType;
-        public Board board;
+        public IBoard Board { get; set; }
 
         public Cell(Board board, Position position, CellType cellType = CellType.Walkable)
         {
-            this.board = board;
-            this.Position = position;
+            Board = board;
+            Position = position;
             this.cellType = cellType;
         }
         
