@@ -5,13 +5,13 @@ namespace AnimalChess.Logic
         CellType Type { get; }
         Animal Animal { get; set; }
         bool HasAnimal { get; }
-        Position Position { get; set; }
+        IPosition Position { get; set; }
         IBoard Board { get; set; }
     }
 
     public class Cell : ICell
     {
-        public Position Position { get; set; }
+        public IPosition Position { get; set; }
         private CellType cellType;
         public IBoard Board { get; set; }
 

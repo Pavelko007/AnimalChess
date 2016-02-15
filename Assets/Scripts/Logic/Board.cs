@@ -4,7 +4,7 @@ namespace AnimalChess.Logic
 {
     public interface IBoard
     {
-        ICell GetCell(Position position);
+        ICell GetCell(IPosition position);
         ICell GetCell(int row, int col);
     }
 
@@ -29,8 +29,8 @@ namespace AnimalChess.Logic
                 }
             }
         }
-
-        public ICell GetCell(Position position)
+        
+        public ICell GetCell(IPosition position)
         {
             return GetCell(position.Row, position.Col);
         }

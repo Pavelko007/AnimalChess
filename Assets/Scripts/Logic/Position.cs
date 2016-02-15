@@ -2,7 +2,14 @@ using System;
 
 namespace AnimalChess.Logic
 {
-    public class Position
+    public interface IPosition
+    {
+        int Row { get; }
+        int Col { get; }
+        IPosition NextPos(Direction direction);
+    }
+
+    public class Position : IPosition
     {
         public int Row { get; private set; }
         public int Col { get; private set; }
@@ -13,9 +20,9 @@ namespace AnimalChess.Logic
             Row = row;
         }
 
-        public Position NextPos(Direction direction)
+        public IPosition NextPos(Direction direction)
         {
-            return new Position(0, 1);
+            return null;
         }
 
         public override bool Equals(Object obj)
