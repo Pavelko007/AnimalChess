@@ -54,6 +54,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="LogicTests\AnimalTests\WhenMoveToOccupiedSquare.cs" />
     <Compile Include="LogicTests\AnimalTests\WhenMovingToEmptySquare.cs" />
     <Compile Include="LogicTests\BoardTests.cs" />
     <Compile Include="LogicTests\PositionTests.cs" />

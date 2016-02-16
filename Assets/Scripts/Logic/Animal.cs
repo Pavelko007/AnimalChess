@@ -27,7 +27,14 @@ namespace AnimalChess.Logic
                 Cell.Animal = null;
                 return true;
             }
-            else throw new NotImplementedException();
+
+            if (nextCell.Animal.Rank > Rank) return false;
+
+            nextCell.Animal = this;
+            Cell.Animal = null;
+            return true;
         }
+
+        public int Rank { get; set; }
     }
 }
