@@ -11,25 +11,25 @@ namespace AnimalChessTests.LogicTests
         [Test]
         public void GetNextLeftTest()
         {
-            GetNextTowartTest(position, Direction.Left, new Position(4, 5));
+            GetNextTowartTest(position, Direction.Left, result: new Position(4, 5));
         }
 
         [Test]
         public void GetNextRightTest()
         {
-            GetNextTowartTest(position, Direction.Right, new Position(6, 5));
+            GetNextTowartTest(position, Direction.Right, result: new Position(6, 5));
         }
 
         [Test]
         public void GetNextUpTest()
         {
-            GetNextTowartTest(position, Direction.Up, new Position(5, 6));
+            GetNextTowartTest(position, Direction.Up, result: new Position(5, 6));
         }
 
         [Test]
         public void GetNextDownTest()
         {
-            GetNextTowartTest(position, Direction.Down, new Position(5, 4));
+            GetNextTowartTest(position, Direction.Down, result: new Position(5, 4));
         }
 
         private static void GetNextTowartTest(Position position, Direction direction, Position result)

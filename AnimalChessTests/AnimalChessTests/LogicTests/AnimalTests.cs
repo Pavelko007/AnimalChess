@@ -25,5 +25,21 @@ namespace AnimalChessTests.LogicTests
             //Assert
             Assert.True(animalMoved);
         }
+
+        [Test]
+        public void MoveAnimalToUnreachableSquareReturnsFalse()
+        {
+            //Arrange
+            var curCellMock = new Mock<ICell>();
+            curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns((ICell) null);
+
+            Animal animal = new Animal(curCellMock.Object);
+
+            //Act
+            bool animalMoved = animal.Move(new Position(0,0));
+
+            //Assert
+            Assert.False(animalMoved);
+        }
     }
 }

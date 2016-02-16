@@ -1,3 +1,5 @@
+using System;
+
 namespace AnimalChess.Logic
 {
     public class Animal
@@ -11,8 +13,14 @@ namespace AnimalChess.Logic
         
         public bool Move(Direction direction)
         {
-            var nextPos = Cell.Position.GetNextTowards(direction);
-            var nextCell = Cell.Board.GetCell(nextPos);
+            IPosition nextPos = Cell.Position.GetNextTowards(direction);
+            return Move(nextPos);
+        }
+
+        public bool Move(IPosition position)
+        {
+            ICell nextCell = Cell.Board.GetCell(position);
+            if (null == nextCell) return false;
             return !nextCell.HasAnimal;
         }
     }

@@ -3,6 +3,8 @@
 	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=878063C888664B488D56B232EC3C2680/ProductVersion/@EntryValue">10.0.2</s:String>
 	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=878063C888664B488D56B232EC3C2680/SnapshotLocation/@EntryValue">C:\Users\Павел\AppData\Local\Temp\ssm.Jacuwyw.tmp</s:String>
 	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\Павел\AppData\Local\Temp\JetBrains\ContinuousTesting\b71f67ff-da08-48b0-9161-7cb59927498e</s:String>
-	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\Павел\AppData\Local\Temp\ssm.Birutyg.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\Павел\AppData\Local\Temp\ssm.Pagesak.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/Strategy/@EntryValue">RunTests</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/TriggerMode/@EntryValue">OnSave</s:String>
 	
 	</wpf:ResourceDictionary>
