@@ -5,11 +5,28 @@ using NUnit.Framework;
 namespace AnimalChessTests.LogicTests
 {
     [TestFixture]
-    class AnimalTests
+    class WhenMovingAnimalToEmptySquare
     {
         [Test]
-        public void MoveAnimalToEmptyCellReturnsTrue()
-        {               
+        public void AnimalChangePos()
+        {
+            //Arrange
+            var curCellMock = new Mock<ICell>();
+            var nextCellMock = new Mock<ICell>();
+            curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(nextCellMock.Object);
+            Animal animal = new Animal(curCellMock.Object);
+
+            //Act
+            animal.Move(new Mock<IPosition>().Object);
+
+            //Assert
+            curCellMock.VerifySet(x => x.Animal = null);
+            nextCellMock.VerifySet(x => x.Animal = animal);
+        }
+
+        [Test]
+        public void ReturnsTrue()
+        {
             //Arrange
             var curCellMock = new Mock<ICell>();
             var nextCellMock = new Mock<ICell>();
@@ -27,16 +44,16 @@ namespace AnimalChessTests.LogicTests
         }
 
         [Test]
-        public void MoveAnimalToUnreachableSquareReturnsFalse()
+        public void IfSquareIsUnreachableReturnsFalse()
         {
             //Arrange
             var curCellMock = new Mock<ICell>();
-            curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns((ICell) null);
+            curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns((ICell)null);
 
             Animal animal = new Animal(curCellMock.Object);
 
             //Act
-            bool animalMoved = animal.Move(new Position(0,0));
+            bool animalMoved = animal.Move(new Position(0, 0));
 
             //Assert
             Assert.False(animalMoved);

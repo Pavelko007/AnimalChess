@@ -21,7 +21,13 @@ namespace AnimalChess.Logic
         {
             ICell nextCell = Cell.Board.GetCell(position);
             if (null == nextCell) return false;
-            return !nextCell.HasAnimal;
+            if (!nextCell.HasAnimal)
+            {
+                nextCell.Animal = this;
+                Cell.Animal = null;
+                return true;
+            }
+            else throw new NotImplementedException();
         }
     }
 }
