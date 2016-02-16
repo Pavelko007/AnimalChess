@@ -2,10 +2,10 @@ using AnimalChess.Logic;
 using Moq;
 using NUnit.Framework;
 
-namespace AnimalChessTests.LogicTests
+namespace AnimalChessTests.LogicTests.AnimalTests
 {
     [TestFixture]
-    class WhenMovingAnimalToEmptySquare
+    class WhenMovingToEmptySquare
     {
         [Test]
         public void AnimalChangePos()
@@ -32,7 +32,7 @@ namespace AnimalChessTests.LogicTests
             var nextCellMock = new Mock<ICell>();
             curCellMock.Setup(x => x.Position.GetNextTowards(It.IsAny<Direction>()));
             curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(nextCellMock.Object);
-            nextCellMock.Setup(foo => foo.HasAnimal).Returns(false);
+            nextCellMock.Setup(x => x.HasAnimal).Returns(false);
 
             Animal animal = new Animal(curCellMock.Object);
 

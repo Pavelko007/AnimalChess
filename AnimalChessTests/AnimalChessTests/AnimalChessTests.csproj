@@ -54,7 +54,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="LogicTests\WhenMovingAnimalToEmptySquare.cs" />
+    <Compile Include="LogicTests\AnimalTests\WhenMovingToEmptySquare.cs" />
     <Compile Include="LogicTests\BoardTests.cs" />
     <Compile Include="LogicTests\PositionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +68,7 @@
       <Name>AnimalChess.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
