@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace AnimalChessTests.LogicTests.AnimalTests
 {
     [TestFixture]
-    class WhenMoveToOccupiedSquare
+    class WhenMoveToOccupiedSquare: WhenMovingToValidSquareBase
     {
         private Mock<ICell> attackingAnimalCellMock;
         private Mock<ICell> otherAnimalCellMock;
@@ -13,8 +13,9 @@ namespace AnimalChessTests.LogicTests.AnimalTests
         private Animal otherAnimal;
 
         [SetUp]
-        public void Init()
+        public override void Init()
         {
+            base.Init();
             attackingAnimalCellMock = new Mock<ICell>();
             otherAnimalCellMock = new Mock<ICell>();
         }
@@ -36,7 +37,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             ArrangeForTwoAnimals(attackingAnimalType, otherAnimalType);
 
             //Act
-            bool hasMoved = attackingAnimal.Move(new Mock<IPosition>().Object);
+            bool hasMoved = attackingAnimal.Move(destMock.Object);
 
             //Assert
             Assert.True(hasMoved);
@@ -51,7 +52,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             ArrangeForTwoAnimals(attackingAnimalType, otherAnimalType);
 
             //Act
-            bool hasMoved = attackingAnimal.Move(new Mock<IPosition>().Object);
+            bool hasMoved = attackingAnimal.Move(destMock.Object);
 
             //Assert
             Assert.False(hasMoved);
