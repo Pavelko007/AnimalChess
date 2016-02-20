@@ -24,7 +24,7 @@ namespace AnimalChess
 
         float tileSize;
         float leftEdge;
-        float topEdge;
+        float bottomEdge;
 
         void Awake()
         {
@@ -37,7 +37,7 @@ namespace AnimalChess
         {
             tileSize = board.boardSprite.bounds.size.x / boardWidth;
             leftEdge = board.transform.position.x - tileSize * 3;
-            topEdge = board.transform.position.y + tileSize * 4;
+            bottomEdge = board.transform.position.y - tileSize * 4;
 
             createTiles();
             createPlayers();
@@ -58,7 +58,7 @@ namespace AnimalChess
                 List<Tile> row = new List<Tile>();
                 for (int colIndx = 0; colIndx < boardHeight; colIndx++)
                 {
-                    Vector3 pos = new Vector2(leftEdge + rowIndx * tileSize, topEdge - colIndx * tileSize);
+                    Vector3 pos = new Vector2(leftEdge + colIndx * tileSize, bottomEdge + rowIndx * tileSize);
 
                     Tile tile = ((GameObject)Instantiate(tilePrefab, pos, Quaternion.identity)).GetComponent<Tile>();
 
@@ -68,8 +68,6 @@ namespace AnimalChess
                 }
                 tiles.Add(row);
             }
-
-
         }
 
         private void Rescale(GameObject rescalable)
@@ -90,6 +88,7 @@ namespace AnimalChess
                 Vector3 animalWorldPos = tiles[boardPos.Row][boardPos.Col].transform.position;
                 AnimalPiece animalPiece = ((GameObject)Instantiate(animalPrefabs[(int)animal.AnimalType], animalWorldPos,
                     Quaternion.identity)).GetComponent<AnimalPiece>();
+
                 animalPiece.tile = tiles[boardPos.Row][boardPos.Col];
                 Rescale(animalPiece.gameObject);
                 tiles[boardPos.Row][boardPos.Col].animalPiece = animalPiece;
