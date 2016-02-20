@@ -4,11 +4,16 @@ namespace AnimalChess
 {
     public class Board : MonoBehaviour
     {
-        public Sprite boardSprite;
+        [HideInInspector] public Logic.Board board;
+
+        [HideInInspector] public Sprite boardSprite;
 
         // Use this for initialization
-        void Start()
+        void Awake()
         {
+            board = new Logic.Board();
+            board.CreateAnimals();
+
             boardSprite = GetComponent<SpriteRenderer>().sprite;
         }
     }

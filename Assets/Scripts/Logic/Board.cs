@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.EventSystems;
 
 namespace AnimalChess.Logic
 {
@@ -38,6 +41,17 @@ namespace AnimalChess.Logic
         public ICell GetCell(int row, int col)
         {
             return boardGrid[row, col];
+        }
+
+        public void CreateAnimals()
+        {
+            GetCell(1, 1).Animal = new Animal(AnimalType.Cat);
+            GetCell(1, 5).Animal = new Animal(AnimalType.Dog);
+        }
+
+        public IEnumerable<Animal> GetAnimals()
+        {
+            return boardGrid.Cast<Cell>().Where(cell => cell.HasAnimal).Select(cell => cell.Animal).ToList();
         }
     }
 }

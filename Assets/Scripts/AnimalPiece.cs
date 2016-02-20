@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AnimalChess.Logic;
+using UnityEngine;
 
 namespace AnimalChess
 {
@@ -12,6 +13,7 @@ namespace AnimalChess
         public Vector3 endPos;
 
         public Tile tile;
+        public Animal animalLogic;
 
         public void Move()
         {

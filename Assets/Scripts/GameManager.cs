@@ -36,8 +36,8 @@ namespace AnimalChess
         void Start()
         {
             tileSize = board.boardSprite.bounds.size.x / boardWidth;
-            leftEdge = (float)(board.transform.position.x - tileSize * 3);
-            topEdge = (float)(board.transform.position.y + tileSize * 4);
+            leftEdge = board.transform.position.x - tileSize * 3;
+            topEdge = board.transform.position.y + tileSize * 4;
 
             createTiles();
             createPlayers();
@@ -83,14 +83,19 @@ namespace AnimalChess
 
         private void createPlayers()
         {
-            Vector3 pos = tiles[6][6].transform.position;
-
-            AnimalPiece animalPiece = ((GameObject)Instantiate(animalPrefabs[0], pos, Quaternion.identity)).GetComponent<AnimalPiece>();
-            animalPiece.tile = tiles[6][6];
-            Rescale(animalPiece.gameObject);
-
-            tiles[6][6].animalPiece = animalPiece;
-        }    
+            var animals = board.board.GetAnimals();
+            foreach (var animal in animals)
+            {
+                var boardPos = animal.Cell.Position;
+                Vector3 animalWorldPos = tiles[boardPos.Row][boardPos.Col].transform.position;
+                AnimalPiece animalPiece = ((GameObject)Instantiate(animalPrefabs[(int)animal.AnimalType], animalWorldPos,
+                    Quaternion.identity)).GetComponent<AnimalPiece>();
+                animalPiece.tile = tiles[boardPos.Row][boardPos.Col];
+                Rescale(animalPiece.gameObject);
+                tiles[boardPos.Row][boardPos.Col].animalPiece = animalPiece;
+                animalPiece.animalLogic = animal;
+            }
+        }
 
         public void moveSelectedAnimal(Tile destTile)
         {
@@ -100,13 +105,13 @@ namespace AnimalChess
                 {
                     isMoving = true;
 
-                    ActiveAnimalPiece.SetupMovement(destTile);               
+                    ActiveAnimalPiece.SetupMovement(destTile);
                 }
             }
         }
 
         public void nextTurn()
-        {        
+        {
             isMoving = false;
             ActiveAnimalPiece = null;
         }
