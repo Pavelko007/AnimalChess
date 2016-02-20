@@ -16,8 +16,11 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(nextCellMock.Object);
             Animal animal = new Animal(curCellMock.Object);
 
+            var destMock = new Mock<IPosition>();
+            destMock.Setup(x => x.IsAdjacent(It.IsAny<IPosition>())).Returns(true);
+
             //Act
-            animal.Move(new Mock<IPosition>().Object);
+            animal.Move(destMock.Object);
 
             //Assert
             curCellMock.VerifySet(x => x.Animal = null);
@@ -35,9 +38,10 @@ namespace AnimalChessTests.LogicTests.AnimalTests
 
             Animal animal = new Animal(curCellMock.Object);
 
-            //Act
             var destMock = new Mock<IPosition>();
             destMock.Setup(x => x.IsAdjacent(It.IsAny<IPosition>())).Returns(true);
+
+            //Act
             bool animalMoved = animal.Move(destMock.Object);
 
             //Assert
