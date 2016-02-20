@@ -103,6 +103,8 @@ namespace AnimalChess
                 destTile == ActiveAnimalPiece.tile || 
                 !ActiveAnimalPiece.animalLogic.Move(destTile.boardPos)) return;
 
+            if (destTile.animalPiece != null) Destroy(destTile.animalPiece.gameObject, .5f);
+
             isMoving = true;
             ActiveAnimalPiece.SetupMovement(destTile);
         }
