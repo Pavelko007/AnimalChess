@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace AnimalChess.Logic
 {
@@ -7,6 +8,7 @@ namespace AnimalChess.Logic
         int Row { get; }
         int Col { get; }
         IPosition GetNextTowards(Direction direction);
+        bool IsAdjacent(IPosition position);
     }
     /// <summary>
     /// identifies cell positions on board
@@ -50,6 +52,13 @@ namespace AnimalChess.Logic
                     throw new ArgumentOutOfRangeException("direction", direction, null);
             }
             return result;
+        }
+
+        public bool IsAdjacent(IPosition position)
+        {
+            return Enum.GetValues(typeof (Direction))
+                .Cast<Direction>()
+                .Any(direction => position.Equals(GetNextTowards(direction)));
         }
 
         public override bool Equals(Object obj)

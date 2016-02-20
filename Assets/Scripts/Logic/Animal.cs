@@ -24,9 +24,11 @@ namespace AnimalChess.Logic
             return Move(nextPos);
         }
 
-        public bool Move(IPosition position)
+        public bool Move(IPosition dest)
         {
-            ICell nextCell = Cell.Board.GetCell(position);
+            if (!IsValidDestination(dest)) return false;
+
+            ICell nextCell = Cell.Board.GetCell(dest);
             if (null == nextCell) return false;
             if (!nextCell.HasAnimal)
             {
@@ -40,6 +42,11 @@ namespace AnimalChess.Logic
             nextCell.Animal = this;
             Cell.Animal = null;
             return true;
+        }
+
+        private bool IsValidDestination(IPosition dest)
+        {
+            return dest.IsAdjacent(Cell.Position);
         }
     }
 }
