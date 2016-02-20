@@ -4,13 +4,20 @@ namespace AnimalChess.Logic
 {
     public class Animal
     {
-        public ICell Cell { get; private set; }
+        public ICell Cell { get; set; }
 
         public Animal(ICell cell)
         {
             Cell = cell;
         }
-        
+
+        public Animal(AnimalType animalType)
+        {
+            AnimalType = animalType;
+        }
+
+        public AnimalType AnimalType { get; set; }
+
         public bool Move(Direction direction)
         {
             IPosition nextPos = Cell.Position.GetNextTowards(direction);
@@ -28,13 +35,11 @@ namespace AnimalChess.Logic
                 return true;
             }
 
-            if (nextCell.Animal.Rank > Rank) return false;
+            if ((int)nextCell.Animal.AnimalType > (int)AnimalType) return false;
 
             nextCell.Animal = this;
             Cell.Animal = null;
             return true;
         }
-
-        public int Rank { get; set; }
     }
 }
