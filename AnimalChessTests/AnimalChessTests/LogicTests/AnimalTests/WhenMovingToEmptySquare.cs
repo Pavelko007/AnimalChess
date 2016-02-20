@@ -30,33 +30,18 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             //Arrange
             var curCellMock = new Mock<ICell>();
             var nextCellMock = new Mock<ICell>();
-            curCellMock.Setup(x => x.Position.GetNextTowards(It.IsAny<Direction>()));
             curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(nextCellMock.Object);
             nextCellMock.Setup(x => x.HasAnimal).Returns(false);
 
             Animal animal = new Animal(curCellMock.Object);
 
             //Act
-            bool animalMoved = animal.Move(Direction.Right);
+            var destMock = new Mock<IPosition>();
+            destMock.Setup(x => x.IsAdjacent(It.IsAny<IPosition>())).Returns(true);
+            bool animalMoved = animal.Move(destMock.Object);
 
             //Assert
             Assert.True(animalMoved);
-        }
-
-        [Test]
-        public void IfSquareIsUnreachableReturnsFalse()
-        {
-            //Arrange
-            var curCellMock = new Mock<ICell>();
-            curCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns((ICell)null);
-
-            Animal animal = new Animal(curCellMock.Object);
-
-            //Act
-            bool animalMoved = animal.Move(new Position(0, 0));
-
-            //Assert
-            Assert.False(animalMoved);
         }
     }
 }
