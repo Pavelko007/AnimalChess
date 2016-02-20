@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AnimalChess.Logic;
 using UnityEngine;
 
 namespace AnimalChess
@@ -61,7 +62,7 @@ namespace AnimalChess
                     Vector3 pos = new Vector2(leftEdge + colIndx * tileSize, bottomEdge + rowIndx * tileSize);
 
                     Tile tile = ((GameObject)Instantiate(tilePrefab, pos, Quaternion.identity)).GetComponent<Tile>();
-
+                    tile.boardPos = new Position(rowIndx, colIndx);
                     Rescale(tile.gameObject);
 
                     row.Add(tile);
@@ -98,15 +99,12 @@ namespace AnimalChess
 
         public void moveSelectedAnimal(Tile destTile)
         {
-            if (ActiveAnimalPiece != null) //TODO use assert for selectedAnimal
-            {
-                if (destTile != ActiveAnimalPiece.tile)
-                {
-                    isMoving = true;
+            if (ActiveAnimalPiece == null ||
+                destTile == ActiveAnimalPiece.tile || 
+                !ActiveAnimalPiece.animalLogic.Move(destTile.boardPos)) return;
 
-                    ActiveAnimalPiece.SetupMovement(destTile);
-                }
-            }
+            isMoving = true;
+            ActiveAnimalPiece.SetupMovement(destTile);
         }
 
         public void nextTurn()

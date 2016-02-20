@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using AnimalChess.Logic;
+using UnityEngine;
 
 namespace AnimalChess
 {
     public class Tile : MonoBehaviour
     {
         public AnimalPiece animalPiece;
+        public IPosition boardPos;
 
         void OnMouseDown()
         {

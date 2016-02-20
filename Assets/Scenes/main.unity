@@ -238,8 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardSprite: {fileID: 0}
-  catPrefab: {fileID: 111118, guid: 4d7a3db2a22668f48b46f5e62bda11b2, type: 2}
-  dogPrefab: {fileID: 111118, guid: 4a76207a0ab10fe4689b590093d27f6f, type: 2}
 --- !u!1 &322715788
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,8 +267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalPrefabs:
   - {fileID: 111118, guid: 1144214e26014274c87239150fc7c66c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 111118, guid: 4d7a3db2a22668f48b46f5e62bda11b2, type: 2}
+  - {fileID: 111118, guid: 4a76207a0ab10fe4689b590093d27f6f, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -22,7 +22,7 @@ namespace AnimalChess.Logic
             Position = position;
             this.cellType = cellType;
         }
-        
+
         public CellType Type { get; private set; }
 
         public Animal Animal
@@ -31,7 +31,7 @@ namespace AnimalChess.Logic
             set
             {
                 animal = value;
-                animal.Cell = this;
+                if (animal != null) animal.Cell = this;
             }
         }
 
