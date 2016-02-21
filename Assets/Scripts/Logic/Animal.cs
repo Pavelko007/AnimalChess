@@ -39,11 +39,24 @@ namespace AnimalChess.Logic
                 return true;
             }
 
-            if ((int)nextCell.Animal.AnimalType > (int)AnimalType) return false;
+            Animal nextCellAnimal = nextCell.Animal;
+
+            if (IsAlly(nextCellAnimal) ||
+                !CanEat(nextCellAnimal)) return false;
 
             nextCell.Animal = this;
             Cell.Animal = null;
             return true;
+        }
+
+        private bool CanEat(Animal nextCellAnimal)
+        {
+            return (int)nextCellAnimal.AnimalType <= (int)AnimalType;
+        }
+
+        private bool IsAlly(Animal nextCellAnimal)
+        {
+            return nextCellAnimal.playerType == playerType;
         }
 
         private bool IsValidDestination(IPosition dest)
