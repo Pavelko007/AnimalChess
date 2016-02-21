@@ -14,7 +14,7 @@ namespace AnimalChess
             {
                 if (GameManager.instance.ActiveAnimalPiece != null)
                 {
-                    GameManager.instance.moveSelectedAnimal(this);
+                    GameManager.instance.MoveSelectedAnimal(this);
                 }
                 else if(animalPiece != null)
                 {

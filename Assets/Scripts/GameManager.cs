@@ -40,8 +40,8 @@ namespace AnimalChess
             leftEdge = board.transform.position.x - tileSize * 3;
             bottomEdge = board.transform.position.y - tileSize * 4;
 
-            createTiles();
-            createPlayers();
+            CreateTiles();
+            CreatePlayers();
         }
 
         // Update is called once per frame
@@ -52,7 +52,8 @@ namespace AnimalChess
                 ActiveAnimalPiece.Move();
             }
         }
-        void createTiles()
+
+        void CreateTiles()
         {
             for (int rowIndx = 0; rowIndx < boardWidth; rowIndx++)
             {
@@ -73,14 +74,14 @@ namespace AnimalChess
 
         private void Rescale(GameObject rescalable)
         {
-            float spriteScale = (float)board.boardSprite.texture.width / (float)(rescalable.GetComponent<SpriteRenderer>().sprite.texture.width * boardWidth);
+            float spriteScale = (float)board.boardSprite.texture.width / (rescalable.GetComponent<SpriteRenderer>().sprite.texture.width * boardWidth);
 
             spriteScale *= rescalable.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit / board.boardSprite.pixelsPerUnit;
 
             rescalable.transform.localScale = new Vector3(spriteScale, spriteScale, 1);
         }
 
-        private void createPlayers()
+        private void CreatePlayers()
         {
             var animals = board.board.GetAnimals();
             foreach (var animal in animals)
@@ -97,7 +98,7 @@ namespace AnimalChess
             }
         }
 
-        public void moveSelectedAnimal(Tile destTile)
+        public void MoveSelectedAnimal(Tile destTile)
         {
             if (ActiveAnimalPiece == null ||
                 destTile == ActiveAnimalPiece.tile || 
@@ -109,7 +110,7 @@ namespace AnimalChess
             ActiveAnimalPiece.SetupMovement(destTile);
         }
 
-        public void nextTurn()
+        public void NextTurn()
         {
             isMoving = false;
             ActiveAnimalPiece = null;

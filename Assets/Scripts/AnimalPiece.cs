@@ -23,7 +23,7 @@ namespace AnimalChess
 
             if (endPos == transform.position)
             {            
-                GameManager.instance.nextTurn();
+                GameManager.instance.NextTurn();
             }
         }
 
