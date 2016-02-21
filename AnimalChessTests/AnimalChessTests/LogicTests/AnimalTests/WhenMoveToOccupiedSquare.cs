@@ -29,12 +29,29 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             otherAnimal = null;
         }
 
+        [Test]
+        public void CanNotEatAlly()
+        {
+            //Arrange
+            CreateAllyAnimals(AnimalType.Cat, AnimalType.Cat);
+            ArrangeForTwoAnimals();
+
+            //Act
+            bool hasMoved = attackingAnimal.Move(destMock.Object);
+
+            //Assert
+            Assert.False(hasMoved);
+            Assert.That(otherAnimalCellMock.Object.Animal, Is.EqualTo(otherAnimal));
+            Assert.That(attackingAnimalCellMock.Object.Animal, Is.EqualTo(attackingAnimal));
+        }
+
         [TestCase(AnimalType.Dog, AnimalType.Cat)]
         [TestCase(AnimalType.Dog, AnimalType.Dog)]
         public void AnimalWithHigherOrEqualRankCanEatAnother(AnimalType attackingAnimalType, AnimalType otherAnimalType)
         {
             //Arrange
-            ArrangeForTwoAnimals(attackingAnimalType, otherAnimalType);
+            CreateOpponentAnimals(attackingAnimalType, otherAnimalType);
+            ArrangeForTwoAnimals();
 
             //Act
             bool hasMoved = attackingAnimal.Move(destMock.Object);
@@ -49,7 +66,8 @@ namespace AnimalChessTests.LogicTests.AnimalTests
         public void AnimalWithLowerRankCanNotEatAnother(AnimalType attackingAnimalType, AnimalType otherAnimalType)
         {
             //Arrange
-            ArrangeForTwoAnimals(attackingAnimalType, otherAnimalType);
+            CreateOpponentAnimals(attackingAnimalType, otherAnimalType);
+            ArrangeForTwoAnimals();
 
             //Act
             bool hasMoved = attackingAnimal.Move(destMock.Object);
@@ -60,17 +78,26 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             Assert.That(attackingAnimalCellMock.Object.Animal, Is.EqualTo(attackingAnimal));
         }
 
-        private void ArrangeForTwoAnimals(AnimalType attackingAnimalType, AnimalType otherAnimalType)
+        private void ArrangeForTwoAnimals()
         {
-            attackingAnimal = new Animal(attackingAnimalType);
-            otherAnimal = new Animal(otherAnimalType) {Cell = otherAnimalCellMock.Object};
-
             otherAnimalCellMock.SetupProperty(x => x.Animal, otherAnimal);
             attackingAnimal.Cell = attackingAnimalCellMock.Object;
 
             attackingAnimalCellMock.SetupProperty(x => x.Animal, attackingAnimal);
             attackingAnimalCellMock.Setup(x => x.Board.GetCell(It.IsAny<IPosition>())).Returns(otherAnimalCellMock.Object);
             otherAnimalCellMock.Setup(x => x.HasAnimal).Returns(true);
+        }
+
+        private void CreateOpponentAnimals(AnimalType attackingAnimalType, AnimalType otherAnimalType)
+        {
+            attackingAnimal = new Animal(attackingAnimalType, PlayerType.BottomPlayer);
+            otherAnimal = new Animal(otherAnimalType, PlayerType.TopPlayer) {Cell = otherAnimalCellMock.Object};
+        }
+
+        private void CreateAllyAnimals(AnimalType attackingAnimalType, AnimalType otherAnimalType)
+        {
+            attackingAnimal = new Animal(attackingAnimalType, PlayerType.BottomPlayer);
+            otherAnimal = new Animal(otherAnimalType, PlayerType.BottomPlayer) {Cell = otherAnimalCellMock.Object};
         }
     }
 }

@@ -43,8 +43,8 @@ namespace AnimalChess.Logic
 
         public void CreateAnimals()
         {
-            GetCell(1, 1).Animal = new Animal(AnimalType.Cat);
-            GetCell(1, 5).Animal = new Animal(AnimalType.Dog);
+            GetCell(1, 1).Animal = new Animal(AnimalType.Cat, PlayerType.BottomPlayer);
+            GetCell(1, 5).Animal = new Animal(AnimalType.Dog, PlayerType.BottomPlayer);
         }
 
         public IEnumerable<Animal> GetAnimals()

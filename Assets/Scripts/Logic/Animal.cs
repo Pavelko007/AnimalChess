@@ -4,6 +4,7 @@ namespace AnimalChess.Logic
 {
     public class Animal
     {
+        private PlayerType playerType;
         public ICell Cell { get; set; }
 
         public Animal(ICell cell)
@@ -11,9 +12,10 @@ namespace AnimalChess.Logic
             Cell = cell;
         }
 
-        public Animal(AnimalType animalType)
+        public Animal(AnimalType animalType, PlayerType playerType)
         {
             AnimalType = animalType;
+            this.playerType = playerType;
         }
 
         public AnimalType AnimalType { get; set; }
