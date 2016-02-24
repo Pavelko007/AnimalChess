@@ -37,7 +37,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             ArrangeForTwoAnimals();
 
             //Act
-            bool hasMoved = attackingAnimal.Move(destMock.Object);
+            bool hasMoved = attackingAnimal.TryMove(destMock.Object);
 
             //Assert
             Assert.False(hasMoved);
@@ -54,7 +54,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             ArrangeForTwoAnimals();
 
             //Act
-            bool hasMoved = attackingAnimal.Move(destMock.Object);
+            bool hasMoved = attackingAnimal.TryMove(destMock.Object);
 
             //Assert
             Assert.True(hasMoved);
@@ -71,7 +71,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
             ArrangeForTwoAnimals();
 
             //Act
-            bool hasMoved = attackingAnimal.Move(destMock.Object);
+            bool hasMoved = attackingAnimal.TryMove(destMock.Object);
 
             //Assert
             Assert.False(hasMoved);
