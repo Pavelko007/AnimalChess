@@ -5,22 +5,26 @@ namespace AnimalChess
 {
     public class Tile : MonoBehaviour
     {
-        public AnimalPiece animalPiece;
+        public AnimalPiece Animal;
         public IPosition boardPos;
 
         void OnMouseDown()
         {
-            if (!GameManager.instance.isMoving)
+            if (GameManager.instance.isMoving) return;
+
+            if (GameManager.instance.IsAnimalSelected())
             {
-                if (GameManager.instance.ActiveAnimalPiece != null)
-                {
-                    GameManager.instance.MoveSelectedAnimal(this);
-                }
-                else if(animalPiece != null)
-                {
-                    GameManager.instance.ActiveAnimalPiece = animalPiece;
-                }
+                GameManager.instance.MoveSelectedAnimal(this);
             }
+            else if(!IsEmpty())
+            {
+                GameManager.instance.SelectedAnimal = Animal;
+            }
+        }
+
+        private bool IsEmpty()
+        {
+            return Animal == null;
         }
     }
 }

@@ -33,7 +33,8 @@ namespace AnimalChess
             endPos = destTile.transform.position;
             journeyLength = Vector3.Distance(startPos, endPos);
             startTime = Time.time;
-            destTile.animalPiece = this;
+            destTile.Animal = this;
+            tile.Animal = null;
             tile = destTile;
         }
     }

@@ -11,8 +11,8 @@ namespace AnimalChess.Logic
 
     public class Board : IBoard
     {
-        private Cell[,] boardGrid = new Cell[9,7];
-        
+        private Cell[,] boardGrid = new Cell[9, 7];
+
 
         public Board()
         {
@@ -30,7 +30,7 @@ namespace AnimalChess.Logic
                 }
             }
         }
-        
+
         public ICell GetCell(IPosition position)
         {
             return GetCell(position.Row, position.Col);
@@ -43,8 +43,16 @@ namespace AnimalChess.Logic
 
         public void CreateAnimals()
         {
-            GetCell(1, 1).Animal = new Animal(AnimalType.Cat, PlayerType.BottomPlayer);
-            GetCell(1, 5).Animal = new Animal(AnimalType.Dog, PlayerType.BottomPlayer);
+            AddAnimalAt(1, 1, new Animal(AnimalType.Cat, PlayerType.BottomPlayer));
+            AddAnimalAt(1, 5, new Animal(AnimalType.Dog, PlayerType.BottomPlayer));
+            AddAnimalAt(6, 0, new Animal(AnimalType.Rat, PlayerType.TopPlayer));
+        }
+
+        private void AddAnimalAt(int row, int col, Animal animal)
+        {
+            var cell = GetCell(row, col);
+            cell.Animal = animal;
+            animal.Cell = cell;
         }
 
         public IEnumerable<Animal> GetAnimals()

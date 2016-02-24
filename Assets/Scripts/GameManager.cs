@@ -10,7 +10,7 @@ namespace AnimalChess
 
         public List<GameObject> animalPrefabs;
 
-        public AnimalPiece ActiveAnimalPiece;
+        public AnimalPiece SelectedAnimal;
 
         public Board board;
         public GameObject tilePrefab;
@@ -47,9 +47,9 @@ namespace AnimalChess
         // Update is called once per frame
         void Update()
         {
-            if (ActiveAnimalPiece != null && isMoving)
+            if (SelectedAnimal != null && isMoving)
             {
-                ActiveAnimalPiece.Move();
+                SelectedAnimal.Move();
             }
         }
 
@@ -93,27 +93,32 @@ namespace AnimalChess
 
                 animalPiece.tile = tiles[boardPos.Row][boardPos.Col];
                 Rescale(animalPiece.gameObject);
-                tiles[boardPos.Row][boardPos.Col].animalPiece = animalPiece;
+                tiles[boardPos.Row][boardPos.Col].Animal = animalPiece;
                 animalPiece.animalLogic = animal;
             }
         }
 
         public void MoveSelectedAnimal(Tile destTile)
         {
-            if (ActiveAnimalPiece == null ||
-                destTile == ActiveAnimalPiece.tile || 
-                !ActiveAnimalPiece.animalLogic.Move(destTile.boardPos)) return;
+            if (SelectedAnimal == null ||
+                destTile == SelectedAnimal.tile || 
+                !SelectedAnimal.animalLogic.TryMove(destTile.boardPos)) return;
 
-            if (destTile.animalPiece != null) Destroy(destTile.animalPiece.gameObject, .5f);
+            if (destTile.Animal != null) Destroy(destTile.Animal.gameObject, .5f);
 
             isMoving = true;
-            ActiveAnimalPiece.SetupMovement(destTile);
+            SelectedAnimal.SetupMovement(destTile);
         }
 
         public void NextTurn()
         {
             isMoving = false;
-            ActiveAnimalPiece = null;
+            SelectedAnimal = null;
+        }
+
+        public bool IsAnimalSelected()
+        {
+            return SelectedAnimal != null;
         }
     }
 }

@@ -7,11 +7,6 @@ namespace AnimalChess.Logic
         private PlayerType playerType;
         public ICell Cell { get; set; }
 
-        public Animal(ICell cell)
-        {
-            Cell = cell;
-        }
-
         public Animal(AnimalType animalType, PlayerType playerType)
         {
             AnimalType = animalType;
@@ -20,22 +15,22 @@ namespace AnimalChess.Logic
 
         public AnimalType AnimalType { get; set; }
 
-        public bool Move(Direction direction)
+        public bool TryMove(Direction direction)
         {
             IPosition nextPos = Cell.Position.GetNextTowards(direction);
-            return Move(nextPos);
+            return TryMove(nextPos);
         }
 
-        public bool Move(IPosition dest)
+        public bool TryMove(IPosition dest)
         {
             if (!IsValidDestination(dest)) return false;
 
             ICell nextCell = Cell.Board.GetCell(dest);
             if (null == nextCell) return false;
+
             if (!nextCell.HasAnimal)
             {
-                nextCell.Animal = this;
-                Cell.Animal = null;
+                Move(nextCell);
                 return true;
             }
 
@@ -44,9 +39,15 @@ namespace AnimalChess.Logic
             if (IsAlly(nextCellAnimal) ||
                 !CanEat(nextCellAnimal)) return false;
 
+            Move(nextCell);
+            return true;
+        }
+
+        private void Move(ICell nextCell)
+        {
             nextCell.Animal = this;
             Cell.Animal = null;
-            return true;
+            Cell = nextCell;
         }
 
         private bool CanEat(Animal nextCellAnimal)

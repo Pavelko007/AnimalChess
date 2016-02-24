@@ -13,7 +13,6 @@ namespace AnimalChess.Logic
     {
         public IPosition Position { get; set; }
         private CellType cellType;
-        private Animal animal;
         public IBoard Board { get; set; }
 
         public Cell(Board board, Position position, CellType cellType = CellType.Walkable)
@@ -25,15 +24,7 @@ namespace AnimalChess.Logic
 
         public CellType Type { get; private set; }
 
-        public Animal Animal
-        {
-            get { return animal; }
-            set
-            {
-                animal = value;
-                if (animal != null) animal.Cell = this;
-            }
-        }
+        public Animal Animal { get; set; }
 
         public bool HasAnimal { get { return Animal != null; } }
     }

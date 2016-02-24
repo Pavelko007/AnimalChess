@@ -63,6 +63,7 @@ namespace AnimalChessTests.LogicTests.AnimalTests
         }
 
         [TestCase(AnimalType.Cat, AnimalType.Dog)]
+        [TestCase(AnimalType.Rat, AnimalType.Cat)]
         public void AnimalWithLowerRankCanNotEatAnother(AnimalType attackingAnimalType, AnimalType otherAnimalType)
         {
             //Arrange
