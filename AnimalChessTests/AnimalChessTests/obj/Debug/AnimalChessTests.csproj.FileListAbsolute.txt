@@ -1,0 +1,16 @@
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\AnimalChessTests.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\AnimalChessTests.pdb
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\Assembly-CSharp.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\Moq.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\nunit.framework.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\UnityEngine.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\UnityEditor.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\Mono.Cecil.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\Assembly-CSharp.pdb
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\Moq.xml
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\nunit.framework.xml
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\UnityEngine.xml
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\bin\Debug\UnityEditor.xml
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\obj\Debug\AnimalChessTests.csprojResolveAssemblyReference.cache
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\obj\Debug\AnimalChessTests.dll
+D:\Unity_Projects\AnimalChess\AnimalChessTests\AnimalChessTests\obj\Debug\AnimalChessTests.pdb
