@@ -55,12 +55,15 @@ namespace AnimalChess
 
         void CreateTiles()
         {
-            for (int rowIndx = 0; rowIndx < boardWidth; rowIndx++)
+            for (int rowIndx = 0; rowIndx < boardHeight; rowIndx++)
             {
                 List<Tile> row = new List<Tile>();
-                for (int colIndx = 0; colIndx < boardHeight; colIndx++)
+                for (int colIndx = 0; colIndx < boardWidth; colIndx++)
                 {
-                    Vector3 pos = new Vector2(leftEdge + colIndx * tileSize, bottomEdge + rowIndx * tileSize);
+                    var xPos = leftEdge + colIndx * tileSize;
+                    var yPos = bottomEdge + rowIndx * tileSize;
+
+                    Vector3 pos = new Vector2(xPos, yPos);
 
                     Tile tile = ((GameObject)Instantiate(tilePrefab, pos, Quaternion.identity)).GetComponent<Tile>();
                     tile.boardPos = new Position(rowIndx, colIndx);
